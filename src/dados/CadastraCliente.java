@@ -1,5 +1,7 @@
 package dados;
 
+import aplicacao.ACMERobots;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class CadastraCliente {
-    private JPanel mainPanel;
+    private JPanel panelMain;
     private JTextField tfCodigo;
     private JTextField tfNome;
     private JTextField tfCpf;
@@ -16,12 +18,17 @@ public class CadastraCliente {
     private JButton btnCadastrar;
     private JButton btnLimpar;
     private JButton btnMostrarClientes;
-    private JButton btnFechar;
+    private JButton btnVoltar;
     private JRadioButton rbIndividual;
     private JRadioButton rbEmpresarial;
     private Map<Integer, Cliente> clientes;
+    private JFrame frame;
+    private ACMERobots sistema;
 
-    public CadastraCliente() {
+    public CadastraCliente(JFrame frame, ACMERobots sistema) {
+        this.frame = frame;
+        this.sistema = sistema;
+
         clientes = new TreeMap<>();
 
         ButtonGroup grupo = new ButtonGroup();
@@ -65,10 +72,10 @@ public class CadastraCliente {
             }
         });
 
-        btnFechar.addActionListener(new ActionListener() {
+        btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                voltar();
             }
         });
     }
@@ -83,7 +90,7 @@ public class CadastraCliente {
             } else {
                 Cliente cliente;
                 if (rbIndividual.isSelected()) {
-                    int cpf = Integer.parseInt(tfCpf.getText().trim());
+                    String cpf = tfCpf.getText().trim();
                     cliente = new Individual(codigo, nome, cpf);
                 } else if (rbEmpresarial.isSelected()) {
                     int ano = Integer.parseInt(tfAno.getText().trim());
@@ -116,17 +123,15 @@ public class CadastraCliente {
         taMensagens.setText(sb.toString());
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame("Cadastrar Cliente");
-                CadastraCliente cadastraCliente = new CadastraCliente();
-                frame.setContentPane(cadastraCliente.mainPanel);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-            }
-        });
+    private void voltar(){
+        MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
+        frame.setContentPane(mainMenu.getPanelMain());
+        frame.revalidate();
+        frame.repaint();
     }
+
+    public JPanel getPanelMain() {
+        return panelMain;
+    }
+
 }

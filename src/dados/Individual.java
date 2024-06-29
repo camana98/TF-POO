@@ -1,19 +1,19 @@
 package dados;
 
 public class Individual extends Cliente {
-	private int cpf;
+	private String cpf;
 
-	public Individual(int codigo, String nome, int cpf) {
+	public Individual(int codigo, String nome, String cpf) {
 		super(codigo, nome);
 		this.cpf = cpf;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
 	@Override
-	public double calculaDesconto(int quantidadeRobos) {
+	public double calculaDesconto() {
 		// Implementação específica para Individual
 		return 0.0;
 	}

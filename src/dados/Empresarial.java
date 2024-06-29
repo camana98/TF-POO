@@ -13,7 +13,7 @@ public class Empresarial extends Cliente {
 	}
 
 	@Override
-	public double calculaDesconto(int quantidadeRobos) {
+	public double calculaDesconto() {
 		// Implementação específica para Empresarial
 		return 0.0;
 	}

@@ -17,7 +17,7 @@ public abstract class Cliente {
 		return nome;
 	}
 
-	public abstract double calculaDesconto(int quantidadeRobos);
+	public abstract double calculaDesconto();
 
 	@Override
 	public String toString() {
