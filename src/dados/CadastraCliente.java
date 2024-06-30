@@ -80,6 +80,14 @@ public class CadastraCliente {
             String nome = this.nomeTextField.getText().trim();
             Cliente cliente = null;
 
+            // Verificar se já existe um cliente com o mesmo código
+            for (Cliente c : this.sistema.getClientes()) {
+                if (c.getCodigo() == codigo) {
+                    this.taMensagens.setText("Erro: Já existe um cliente com o código " + codigo);
+                    return;
+                }
+            }
+
             if (this.individualRadioButton.isSelected()) {
                 String cpf = this.cpfTextField.getText().trim();
                 cliente = new Individual(codigo, nome, cpf);
@@ -97,6 +105,7 @@ public class CadastraCliente {
             this.taMensagens.setText("Erro: Código e ano devem ser números.");
         }
     }
+
 
     private void mostrarClientes() {
         StringBuilder sb = new StringBuilder("Clientes cadastrados:\n");

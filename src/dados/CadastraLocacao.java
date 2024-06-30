@@ -61,6 +61,14 @@ public class CadastraLocacao {
                 return;
             }
 
+            // Verificar se já existe uma locação com o mesmo número
+            for (Locacao locacao : sistema.getLocacoes()) {
+                if (locacao.getNumero() == numero) {
+                    JOptionPane.showMessageDialog(panelMain, "Erro: Já existe uma locação com o número " + numero, "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
             Locacao novaLocacao = new Locacao(numero, cliente, robosSelecionados, dataInicio, dataFim);
             sistema.cadastrarNovaLocacao(novaLocacao);
             JOptionPane.showMessageDialog(panelMain, "Locação cadastrada com sucesso!");
@@ -69,6 +77,7 @@ public class CadastraLocacao {
             JOptionPane.showMessageDialog(panelMain, "Erro: Dados inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     private void limparCampos() {
         numeroField.setText("");
