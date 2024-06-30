@@ -1,98 +1,61 @@
 package dados;
+import aplicacao.*;
 
-import aplicacao.ACMERobots;
-
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
 
 public class CadastraRobo {
-    private JPanel mainPanel;
-    private JRadioButton domesticoRadioButton;
-    private JRadioButton industrialRadioButton;
-    private JRadioButton agricolaRadioButton;
     private JTextField idTextField;
     private JTextField modeloTextField;
     private JTextField valorDiarioTextField;
+    private JButton cadastrarButton;
+    private JButton mostrarButton;
+    private JPanel mainPanel;
+    private JTextArea taMensagens;
+    private JRadioButton domesticoRadioButton;
+    private JRadioButton industrialRadioButton;
+    private JRadioButton agricolaRadioButton;
     private JTextField nivelTextField;
     private JTextField setorTextField;
     private JTextField areaTextField;
     private JTextField usoTextField;
-    private JButton cadastrarButton;
-    private JButton limparButton;
-    private JButton mostrarButton;
     private JButton voltarButton;
-    private JTextArea taMensagens;
+    private JButton limparButton;
     private JFrame frame;
-    private Map<Integer, Robo> robos;
     private ACMERobots sistema;
 
     public CadastraRobo(JFrame frame, ACMERobots sistema) {
-
         this.frame = frame;
         this.sistema = sistema;
 
-        this.robos = new TreeMap<>();
-
-        ButtonGroup grupo = new ButtonGroup();
-        grupo.add(this.domesticoRadioButton);
-        grupo.add(this.industrialRadioButton);
-        grupo.add(this.agricolaRadioButton);
-
-        this.domesticoRadioButton.addActionListener(new ActionListener() {
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(true);
-                CadastraRobo.this.setorTextField.setEnabled(false);
-                CadastraRobo.this.areaTextField.setEnabled(false);
-                CadastraRobo.this.usoTextField.setEnabled(false);
-            }
-        });
-        this.industrialRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(false);
-                CadastraRobo.this.setorTextField.setEnabled(true);
-                CadastraRobo.this.areaTextField.setEnabled(false);
-                CadastraRobo.this.usoTextField.setEnabled(false);
-            }
-        });
-        this.agricolaRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(false);
-                CadastraRobo.this.setorTextField.setEnabled(false);
-                CadastraRobo.this.areaTextField.setEnabled(true);
-                CadastraRobo.this.usoTextField.setEnabled(true);
+                cadastrarRobo();
             }
         });
 
-        this.cadastrarButton.addActionListener(new ActionListener() {
+        mostrarButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.cadastrarRobo();
+                mostrarRobos();
             }
-        });
-        this.limparButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.limparCampos();
-            }
-        });
-        this.mostrarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.mostrarRobos();
-            }
-        });
-        this.voltarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { voltar(); }
         });
 
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
+
+        limparButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limparCampos();
+            }
+        });
     }
 
     private void cadastrarRobo() {
@@ -100,32 +63,43 @@ public class CadastraRobo {
             int id = Integer.parseInt(this.idTextField.getText().trim());
             String modelo = this.modeloTextField.getText().trim();
             double valorDiario = Double.parseDouble(this.valorDiarioTextField.getText().trim());
+            Robo robo = null;
 
-            if (this.robos.containsKey(id)) {
-                this.taMensagens.setText("Erro: ID de robô já existente.");
+            if (this.domesticoRadioButton.isSelected()) {
+                int nivel = Integer.parseInt(this.nivelTextField.getText().trim());
+                robo = new Domestico(id, modelo, valorDiario, nivel);
+            } else if (this.industrialRadioButton.isSelected()) {
+                String setor = this.setorTextField.getText().trim();
+                robo = new Industrial(id, modelo, valorDiario, setor);
+            } else if (this.agricolaRadioButton.isSelected()) {
+                double area = Double.parseDouble(this.areaTextField.getText().trim());
+                String uso = this.usoTextField.getText().trim();
+                robo = new Agricola(id, modelo, valorDiario, area, uso);
             } else {
-                Robo robo;
-                if (this.domesticoRadioButton.isSelected()) {
-                    int nivel = Integer.parseInt(this.nivelTextField.getText().trim());
-                    robo = new Domestico(id, modelo, valorDiario, nivel);
-                } else if (this.industrialRadioButton.isSelected()) {
-                    String setor = this.setorTextField.getText().trim();
-                    robo = new Industrial(id, modelo, valorDiario, setor);
-                } else if (this.agricolaRadioButton.isSelected()) {
-                    double area = Double.parseDouble(this.areaTextField.getText().trim());
-                    String uso = this.usoTextField.getText().trim();
-                    robo = new Agricola(id, modelo, valorDiario, area, uso);
-                } else {
-                    this.taMensagens.setText("Erro: Selecione um tipo de robô.");
-                    return;
-                }
-
-                this.robos.put(id, robo);
-                this.taMensagens.setText("Robô cadastrado com sucesso.");
+                this.taMensagens.setText("Erro: Selecione um tipo de robô.");
+                return;
             }
+
+            this.sistema.cadastrarNovoRobo(robo);
+            this.taMensagens.setText("Robô cadastrado com sucesso.");
         } catch (NumberFormatException e) {
             this.taMensagens.setText("Erro: ID, valor diário e área devem ser números.");
         }
+    }
+
+    private void mostrarRobos() {
+        StringBuilder sb = new StringBuilder("Robôs cadastrados:\n");
+        for (Robo robo : this.sistema.getRobos()) {
+            sb.append(robo).append("\n");
+        }
+        this.taMensagens.setText(sb.toString());
+    }
+
+    private void voltar() {
+        MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
+        frame.setContentPane(mainMenu.getPanelMain());
+        frame.revalidate();
+        frame.repaint();
     }
 
     private void limparCampos() {
@@ -137,25 +111,6 @@ public class CadastraRobo {
         this.areaTextField.setText("");
         this.usoTextField.setText("");
         this.taMensagens.setText("");
-    }
-
-    private void mostrarRobos() {
-        StringBuilder sb = new StringBuilder("Robôs cadastrados:\n");
-        Iterator<Robo> iterator = this.robos.values().iterator();
-
-        while (iterator.hasNext()) {
-            Robo robo = iterator.next();
-            sb.append(robo).append("\n");
-        }
-
-        this.taMensagens.setText(sb.toString());
-    }
-
-    private void voltar(){
-        MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
-        frame.setContentPane(mainMenu.getPanelMain());
-        frame.revalidate();
-        frame.repaint();
     }
 
     public JPanel getPanelMain() {
