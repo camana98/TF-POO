@@ -34,12 +34,14 @@ public class CadastraRobo {
     private JButton mostrarButton;
     private JButton fecharButton;
     private JTextArea textArea1;
+    private JFrame frame;
     private Map<Integer, Robo> robos;
+    private ACMERobots sistema;
 
     public CadastraRobo(JFrame frame, ACMERobots sistema) {
 
-        //this.frame = frame;
-        //this.sistema = sistema;
+        this.frame = frame;
+        this.sistema = sistema;
 
         this.robos = new TreeMap<>();
 
@@ -164,14 +166,14 @@ public class CadastraRobo {
         });
     }*/
 
-    //private void voltar(){
-     //   MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
-     //   frame.setContentPane(mainMenu.getPanelMain());
-     //   frame.revalidate();
-     //   frame.repaint();
-   // }
+    private void voltar(){
+        MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
+        frame.setContentPane(mainMenu.getPanelMain());
+        frame.revalidate();
+        frame.repaint();
+    }
 
-   // public JPanel getPanelMain() {
-   //     return mainPanel;
-   // }
+    public JPanel getPanelMain() {
+        return mainPanel;
+    }
 }
