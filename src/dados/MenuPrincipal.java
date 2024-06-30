@@ -8,6 +8,7 @@ public class MenuPrincipal {
     private JPanel panelMain;
     private JButton btnCadastraCliente;
     private JButton btnCadastraLocacao;
+    private JButton btnCadastraRobo;
     private JFrame frame;
     private ACMERobots sistema;
 
@@ -29,11 +30,23 @@ public class MenuPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastraLocacao cadastraLocacaoPanel = new CadastraLocacao(frame, sistema);
+                cadastraLocacaoPanel.atualizarModelos(); //Atualiza a lista de robôs e clientes
                 frame.setContentPane(cadastraLocacaoPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
             }
         });
+
+        btnCadastraRobo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CadastraRobo cadastraRoboPanel = new CadastraRobo(frame, sistema);
+                frame.setContentPane(cadastraRoboPanel.getPanelMain());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
     }
 
     public JPanel getPanelMain() {

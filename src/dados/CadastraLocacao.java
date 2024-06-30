@@ -1,5 +1,6 @@
 package dados;
 import aplicacao.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,7 @@ public class CadastraLocacao {
     private JSpinner dataInicioSpinner;
     private JSpinner dataFimSpinner;
     private JButton addButton;
-    private JButton btnVoltar;
+    private JButton voltarButton;
     private JFrame frame;
     private ACMERobots sistema;
     private DefaultComboBoxModel<Cliente> clienteModel;
@@ -24,34 +25,27 @@ public class CadastraLocacao {
         this.frame = frame;
         this.sistema = sistema;
 
-        // Inicializar o modelo do JComboBox
+        addButton.addActionListener(e -> cadastrarLocacao());
+
+        voltarButton.addActionListener(e -> voltar());
+
+        dataInicioSpinner.setModel(new SpinnerDateModel());
+        dataFimSpinner.setModel(new SpinnerDateModel());
+        atualizarModelos();
+    }
+
+    public void atualizarModelos() {
         clienteModel = new DefaultComboBoxModel<>();
         for (Cliente cliente : sistema.getClientes()) {
             clienteModel.addElement(cliente);
         }
         clienteComboBox.setModel(clienteModel);
 
-        // Inicializar o modelo do JList
         robosListModel = new DefaultListModel<>();
         for (Robo robo : sistema.getRobos()) {
             robosListModel.addElement(robo);
         }
         robosList.setModel(robosListModel);
-
-        // Configurar JSpinners para datas
-        dataInicioSpinner.setModel(new SpinnerDateModel());
-        dataFimSpinner.setModel(new SpinnerDateModel());
-
-        // Adicionar ação ao botão de cadastro
-        addButton.addActionListener(e -> cadastrarLocacao());
-
-        // Adicionar ação ao botão Voltar
-        btnVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                voltar();
-            }
-        });
     }
 
     private void cadastrarLocacao() {

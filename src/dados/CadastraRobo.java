@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 
 public class CadastraRobo {
@@ -32,8 +31,8 @@ public class CadastraRobo {
     private JButton cadastrarButton;
     private JButton limparButton;
     private JButton mostrarButton;
-    private JButton fecharButton;
-    private JTextArea textArea1;
+    private JButton voltarButton;
+    private JTextArea taMensagens;
     private JFrame frame;
     private Map<Integer, Robo> robos;
     private ACMERobots sistema;
@@ -90,11 +89,10 @@ public class CadastraRobo {
                 CadastraRobo.this.mostrarRobos();
             }
         });
-        this.fecharButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
+        this.voltarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) { voltar(); }
         });
+
     }
 
     private void cadastrarRobo() {
@@ -104,7 +102,7 @@ public class CadastraRobo {
             double valorDiario = Double.parseDouble(this.valorDiarioTextField.getText().trim());
 
             if (this.robos.containsKey(id)) {
-                this.textArea1.setText("Erro: ID de robô já existente.");
+                this.taMensagens.setText("Erro: ID de robô já existente.");
             } else {
                 Robo robo;
                 if (this.domesticoRadioButton.isSelected()) {
@@ -118,15 +116,15 @@ public class CadastraRobo {
                     String uso = this.usoTextField.getText().trim();
                     robo = new Agricola(id, modelo, valorDiario, area, uso);
                 } else {
-                    this.textArea1.setText("Erro: Selecione um tipo de robô.");
+                    this.taMensagens.setText("Erro: Selecione um tipo de robô.");
                     return;
                 }
 
                 this.robos.put(id, robo);
-                this.textArea1.setText("Robô cadastrado com sucesso.");
+                this.taMensagens.setText("Robô cadastrado com sucesso.");
             }
         } catch (NumberFormatException e) {
-            this.textArea1.setText("Erro: ID, valor diário e área devem ser números.");
+            this.taMensagens.setText("Erro: ID, valor diário e área devem ser números.");
         }
     }
 
@@ -138,7 +136,7 @@ public class CadastraRobo {
         this.setorTextField.setText("");
         this.areaTextField.setText("");
         this.usoTextField.setText("");
-        this.textArea1.setText("");
+        this.taMensagens.setText("");
     }
 
     private void mostrarRobos() {
@@ -150,21 +148,8 @@ public class CadastraRobo {
             sb.append(robo).append("\n");
         }
 
-        this.textArea1.setText(sb.toString());
+        this.taMensagens.setText(sb.toString());
     }
-
-/*    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame("Cadastrar Robô");
-                CadastraRobo cadastraRobo = new CadastraRobo();
-                frame.setContentPane(cadastraRobo.mainPanel);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-            }
-        });
-    }*/
 
     private void voltar(){
         MenuPrincipal mainMenu = new MenuPrincipal(frame, sistema);
