@@ -29,6 +29,36 @@ public class CadastraRobo {
         this.frame = frame;
         this.sistema = sistema;
 
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(this.domesticoRadioButton);
+        grupo.add(this.industrialRadioButton);
+        grupo.add(this.agricolaRadioButton);
+
+        this.domesticoRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CadastraRobo.this.nivelTextField.setEnabled(true);
+                CadastraRobo.this.setorTextField.setEnabled(false);
+                CadastraRobo.this.areaTextField.setEnabled(false);
+                CadastraRobo.this.usoTextField.setEnabled(false);
+            }
+        });
+        this.industrialRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CadastraRobo.this.nivelTextField.setEnabled(false);
+                CadastraRobo.this.setorTextField.setEnabled(true);
+                CadastraRobo.this.areaTextField.setEnabled(false);
+                CadastraRobo.this.usoTextField.setEnabled(false);
+            }
+        });
+        this.agricolaRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CadastraRobo.this.nivelTextField.setEnabled(false);
+                CadastraRobo.this.setorTextField.setEnabled(false);
+                CadastraRobo.this.areaTextField.setEnabled(true);
+                CadastraRobo.this.usoTextField.setEnabled(true);
+            }
+        });
+
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
