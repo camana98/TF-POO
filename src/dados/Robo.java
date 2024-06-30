@@ -24,4 +24,9 @@ public abstract class Robo {
 	}
 
 	public abstract double calculaLocacao(int dias);
+
+	@Override
+	public String toString() {
+		return "ID: " + id + ", Modelo: " + modelo + ", Valor Diário: " + valorDiario;
+	}
 }

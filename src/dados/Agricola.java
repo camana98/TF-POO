@@ -22,4 +22,9 @@ public class Agricola extends Robo {
 	public String getUso() {
 		return uso;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ", Área: " + area + ", Uso: " + uso;
+	}
 }
