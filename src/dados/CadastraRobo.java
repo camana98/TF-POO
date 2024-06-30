@@ -95,6 +95,14 @@ public class CadastraRobo {
             double valorDiario = Double.parseDouble(this.valorDiarioTextField.getText().trim());
             Robo robo = null;
 
+            // Verificar se já existe um robô com o mesmo ID
+            for (Robo r : this.sistema.getRobos()) {
+                if (r.getId() == id) {
+                    this.taMensagens.setText("Erro: Já existe um robô com o ID " + id);
+                    return;
+                }
+            }
+
             if (this.domesticoRadioButton.isSelected()) {
                 int nivel = Integer.parseInt(this.nivelTextField.getText().trim());
                 robo = new Domestico(id, modelo, valorDiario, nivel);
@@ -116,6 +124,7 @@ public class CadastraRobo {
             this.taMensagens.setText("Erro: ID, valor diário e área devem ser números.");
         }
     }
+
 
     private void mostrarRobos() {
         StringBuilder sb = new StringBuilder("Robôs cadastrados:\n");
