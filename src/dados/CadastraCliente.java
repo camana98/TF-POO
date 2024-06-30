@@ -25,6 +25,26 @@ public class CadastraCliente {
         this.frame = frame;
         this.sistema = sistema;
 
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(individualRadioButton);
+        grupo.add(empresarialRadioButton);
+
+        individualRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cpfTextField.setEnabled(true);
+                anoTextField.setEnabled(false);
+            }
+        });
+
+        empresarialRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cpfTextField.setEnabled(false);
+                anoTextField.setEnabled(true);
+            }
+        });
+
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
