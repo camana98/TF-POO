@@ -50,12 +50,18 @@ public class Locacao {
 		return robos;
 	}
 
+	private int getDuracaoDias() {
+		long diff = dataFim.getTime() - dataInicio.getTime();
+		return (int) ((diff + 1000 * 60 * 60 * 24 - 1) / (1000 * 60 * 60 * 24)); // Adiciona 1 para garantir arredondamento correto
+	}
+
+
 	public double calculaValorFinal() {
 		double valorLocacao = 0;
 		for (Robo robo : robos) {
-			valorLocacao += robo.calculaLocacao((int) ((dataFim.getTime() - dataInicio.getTime()) / (1000 * 60 * 60 * 24)));
+			valorLocacao += robo.calculaLocacao(getDuracaoDias());
 		}
-		double desconto = cliente.calculaDesconto();
+		double desconto = cliente.calculaDesconto(getRobos().size());
 		return valorLocacao - (valorLocacao * desconto);
 	}
 }

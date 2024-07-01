@@ -13,9 +13,11 @@ public class Individual extends Cliente {
 	}
 
 	@Override
-	public double calculaDesconto() {
-		// Implementação específica para Individual
-		return 0.0;
+	public double calculaDesconto(int qtdeRobos) {
+		if (qtdeRobos > 1) {
+			return 0.05; // Desconto de 5%
+		}
+		return 0.0; // Sem desconto
 	}
 
 	@Override
