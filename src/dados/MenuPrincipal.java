@@ -10,6 +10,7 @@ public class MenuPrincipal {
     private JButton btnCadastraCliente;
     private JButton btnCadastraLocacao;
     private JButton btnCadastraRobo;
+    private JButton btnAlteraSituacao;
     private JFrame frame;
     private ACMERobots sistema;
 
@@ -47,6 +48,17 @@ public class MenuPrincipal {
                 frame.repaint();
             }
         });
+
+        btnAlteraSituacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AlteraSituacao alteraSituacaoPanel = new AlteraSituacao(frame, sistema);
+                frame.setContentPane(alteraSituacaoPanel.getPanelMain());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
     }
 
     public JPanel getPanelMain() {
