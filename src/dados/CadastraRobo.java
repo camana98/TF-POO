@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 public class CadastraRobo {
     private JTextField idTextField;
     private JTextField modeloTextField;
-    private JTextField valorDiarioTextField;
     private JButton cadastrarButton;
     private JButton mostrarButton;
     private JPanel mainPanel;
@@ -16,18 +15,21 @@ public class CadastraRobo {
     private JRadioButton domesticoRadioButton;
     private JRadioButton industrialRadioButton;
     private JRadioButton agricolaRadioButton;
-    private JTextField nivelTextField;
     private JTextField setorTextField;
     private JTextField areaTextField;
     private JTextField usoTextField;
     private JButton voltarButton;
     private JButton limparButton;
+    private JSpinner nivelSpinner;
     private JFrame frame;
     private ACMERobots sistema;
 
     public CadastraRobo(JFrame frame, ACMERobots sistema) {
         this.frame = frame;
         this.sistema = sistema;
+
+        SpinnerModel nivelModel = new SpinnerNumberModel(1, 1, 3, 1);
+        nivelSpinner.setModel(nivelModel);
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(this.domesticoRadioButton);
@@ -36,7 +38,7 @@ public class CadastraRobo {
 
         this.domesticoRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(true);
+                CadastraRobo.this.nivelSpinner.setEnabled(true);
                 CadastraRobo.this.setorTextField.setEnabled(false);
                 CadastraRobo.this.areaTextField.setEnabled(false);
                 CadastraRobo.this.usoTextField.setEnabled(false);
@@ -44,7 +46,7 @@ public class CadastraRobo {
         });
         this.industrialRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(false);
+                CadastraRobo.this.nivelSpinner.setEnabled(false);
                 CadastraRobo.this.setorTextField.setEnabled(true);
                 CadastraRobo.this.areaTextField.setEnabled(false);
                 CadastraRobo.this.usoTextField.setEnabled(false);
@@ -52,7 +54,7 @@ public class CadastraRobo {
         });
         this.agricolaRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                CadastraRobo.this.nivelTextField.setEnabled(false);
+                CadastraRobo.this.nivelSpinner.setEnabled(false);
                 CadastraRobo.this.setorTextField.setEnabled(false);
                 CadastraRobo.this.areaTextField.setEnabled(true);
                 CadastraRobo.this.usoTextField.setEnabled(true);
@@ -92,7 +94,6 @@ public class CadastraRobo {
         try {
             int id = Integer.parseInt(this.idTextField.getText().trim());
             String modelo = this.modeloTextField.getText().trim();
-            double valorDiario = Double.parseDouble(this.valorDiarioTextField.getText().trim());
             Robo robo = null;
 
             // Verificar se já existe um robô com o mesmo ID
@@ -104,14 +105,24 @@ public class CadastraRobo {
             }
 
             if (this.domesticoRadioButton.isSelected()) {
-                int nivel = Integer.parseInt(this.nivelTextField.getText().trim());
+                int nivel = (Integer) this.nivelSpinner.getValue();
+                double valorDiario = 0.0;
+                if (nivel == 1) {
+                    valorDiario = 10.0;
+                } else if (nivel == 2) {
+                    valorDiario = 20.0;
+                } else if (nivel == 3) {
+                    valorDiario = 50.0;
+                }
                 robo = new Domestico(id, modelo, valorDiario, nivel);
             } else if (this.industrialRadioButton.isSelected()) {
                 String setor = this.setorTextField.getText().trim();
+                double valorDiario = 90.0;
                 robo = new Industrial(id, modelo, valorDiario, setor);
             } else if (this.agricolaRadioButton.isSelected()) {
                 double area = Double.parseDouble(this.areaTextField.getText().trim());
                 String uso = this.usoTextField.getText().trim();
+                double valorDiario = area * 10.0;
                 robo = new Agricola(id, modelo, valorDiario, area, uso);
             } else {
                 this.taMensagens.setText("Erro: Selecione um tipo de robô.");
@@ -121,10 +132,9 @@ public class CadastraRobo {
             this.sistema.cadastrarNovoRobo(robo);
             this.taMensagens.setText("Robô cadastrado com sucesso.");
         } catch (NumberFormatException e) {
-            this.taMensagens.setText("Erro: ID, valor diário e área devem ser números.");
+            this.taMensagens.setText("Erro: ID e área devem ser números.");
         }
     }
-
 
     private void mostrarRobos() {
         StringBuilder sb = new StringBuilder("Robôs cadastrados:\n");
@@ -144,8 +154,6 @@ public class CadastraRobo {
     private void limparCampos() {
         this.idTextField.setText("");
         this.modeloTextField.setText("");
-        this.valorDiarioTextField.setText("");
-        this.nivelTextField.setText("");
         this.setorTextField.setText("");
         this.areaTextField.setText("");
         this.usoTextField.setText("");
