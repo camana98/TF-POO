@@ -11,6 +11,7 @@ public class MenuPrincipal {
     private JButton btnCadastraLocacao;
     private JButton btnCadastraRobo;
     private JButton btnAlteraSituacao;
+    private JButton btnConsultarLocacoes;
     private JFrame frame;
     private ACMERobots sistema;
 
@@ -54,6 +55,16 @@ public class MenuPrincipal {
             public void actionPerformed(ActionEvent e) {
                 AlteraSituacao alteraSituacaoPanel = new AlteraSituacao(frame, sistema);
                 frame.setContentPane(alteraSituacaoPanel.getPanelMain());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        btnConsultarLocacoes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultarLocacoes consultarLocacoesPanel = new ConsultarLocacoes(frame, sistema);
+                frame.setContentPane(consultarLocacoesPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
             }
