@@ -1,6 +1,6 @@
 • Cadastrar novo robô (X)  
 • Cadastrar novo cliente (X)   
-• Cadastrar nova locação (X) - Falta colocar na fila de locações pendentes.   
+• Cadastrar nova locação (X)
 • Processar locações (X)   
 • Mostrar relatório geral ()   
 • Consultar todas as locações (X)   
