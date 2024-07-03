@@ -14,6 +14,9 @@ public class MenuPrincipal {
     private JButton btnConsultarLocacoes;
     private JButton bntMostrarRelatorioGeral;
     private JButton btnCarregaDadosIniciais;
+    private JButton btnCarregarDados;
+    private JButton btnSalvarDados;
+    private JButton btnFinalizarSistema;
     private JFrame frame;
     private ACMERobots sistema;
 
@@ -91,6 +94,48 @@ public class MenuPrincipal {
                 frame.repaint();
             }
         });
+
+        btnCarregarDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarregaDados carregaDadosPanel = new CarregaDados(frame, sistema);
+                frame.setContentPane(carregaDadosPanel.getPanelMain());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        btnSalvarDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarregaDados carregaDadosPanel = new CarregaDados(frame, sistema); //MUDA AQUI
+                frame.setContentPane(carregaDadosPanel.getPanelMain());            //AQUI TAMBEM
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        btnFinalizarSistema.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object[] options = {"Sim", "Não"};
+                int confirm = JOptionPane.showOptionDialog(
+                        frame,
+                        "Tem certeza de que deseja finalizar o sistema?",
+                        "Confirmar Finalização",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+
+
 
     }
 

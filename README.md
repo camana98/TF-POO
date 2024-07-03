@@ -7,5 +7,5 @@
 • Alterar a situação de uma locação (X)     
 • Realizar carga de dados iniciais do sistema (X)    
 • Salvar dados () - Fazer     
-• Carregar dados ()    
-• Finalizar sistema ()     
+• Carregar dados (X)    
+• Finalizar sistema (X)     

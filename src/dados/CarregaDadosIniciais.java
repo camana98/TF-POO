@@ -37,6 +37,7 @@ public class CarregaDadosIniciais {
             }
         });
 
+
     }
 
     private void carregarDados() {
@@ -56,7 +57,7 @@ public class CarregaDadosIniciais {
         }
     }
 
-    private void carregarRobos(String nomeArquivo) throws IOException {
+    public void carregarRobos(String nomeArquivo) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
         reader.readLine();
         String linha;
@@ -100,7 +101,7 @@ public class CarregaDadosIniciais {
         reader.close();
     }
 
-    private void carregarClientes(String nomeArquivo) throws IOException {
+    public void carregarClientes(String nomeArquivo) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
         reader.readLine(); // Pular a primeira linha
         String linha;
@@ -127,7 +128,7 @@ public class CarregaDadosIniciais {
     }
 
 
-    private void carregarLocacoes(String nomeArquivo) throws IOException, ParseException {
+    public void carregarLocacoes(String nomeArquivo) throws IOException, ParseException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
         reader.readLine(); // Pular a primeira linha
         String linha;
@@ -195,6 +196,7 @@ public class CarregaDadosIniciais {
         frame.revalidate();
         frame.repaint();
     }
+
 
     public JPanel getPanelMain() {
         return panelMain;
