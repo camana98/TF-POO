@@ -18,7 +18,7 @@ public class ConsultarLocacoes {
         this.frame = frame;
         this.sistema = sistema;
 
-        // Inicializa a JTextArea dentro do JScrollPane
+        // inicializa a JTextArea dentro do JScrolPane
         JTextArea textAreaContent = new JTextArea();
         textAreaContent.setEditable(false);
         textArea.setViewportView(textAreaContent);

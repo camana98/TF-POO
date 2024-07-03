@@ -14,13 +14,13 @@ public class MostrarRelatorioGeral {
     private JScrollPane ScrollPaneLocacoes;
     private JButton voltarButton;
     private ACMERobots sistema;
-    private JFrame frame; // Adicione esta linha
+    private JFrame frame;
 
     public MostrarRelatorioGeral(JFrame frame, ACMERobots sistema) {
         this.sistema = sistema;
-        this.frame = frame; // Inicialize a variável frame
+        this.frame = frame;
 
-        // Initialize and set JTextAreas to ScrollPanes
+
         JTextArea textAreaClientes = new JTextArea();
         textAreaClientes.setEditable(false);
         ScrollPaneClientes.setViewportView(textAreaClientes);
@@ -33,10 +33,10 @@ public class MostrarRelatorioGeral {
         textAreaLocacoes.setEditable(false);
         ScrollPaneLocacoes.setViewportView(textAreaLocacoes);
 
-        // Display data
+
         mostrarRelatorio(textAreaClientes, textAreaRobos, textAreaLocacoes);
 
-        // Add action listener to the voltar button
+
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

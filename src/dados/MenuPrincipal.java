@@ -38,7 +38,7 @@ public class MenuPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastraLocacao cadastraLocacaoPanel = new CadastraLocacao(frame, sistema);
-                cadastraLocacaoPanel.atualizarModelos(); //Atualiza a lista de robôs e clientes
+                cadastraLocacaoPanel.atualizarModelos(); //atualiza a lista de robos e clientes
                 frame.setContentPane(cadastraLocacaoPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
@@ -108,8 +108,8 @@ public class MenuPrincipal {
         btnSalvarDados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarregaDados carregaDadosPanel = new CarregaDados(frame, sistema); //MUDA AQUI
-                frame.setContentPane(carregaDadosPanel.getPanelMain());            //AQUI TAMBEM
+                SalvarDados salvarDadosPanel = new SalvarDados(frame, sistema);
+                frame.setContentPane(salvarDadosPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
             }

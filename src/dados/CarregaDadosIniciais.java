@@ -103,7 +103,7 @@ public class CarregaDadosIniciais {
 
     public void carregarClientes(String nomeArquivo) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
-        reader.readLine(); // Pular a primeira linha
+        reader.readLine(); // pula primeira linha
         String linha;
         while ((linha = reader.readLine()) != null) {
             String[] partes = linha.split(";");
@@ -111,11 +111,11 @@ public class CarregaDadosIniciais {
             String nome = partes[1];
             Cliente cliente;
             switch (partes[2]) {
-                case "1": // Individual
+                case "1": //individual
                     String cpf = partes[3];
                     cliente = new Individual(codigo, nome, cpf);
                     break;
-                case "2": // Empresarial
+                case "2": //empresarial
                     int ano = Integer.parseInt(partes[3]);
                     cliente = new Empresarial(codigo, nome, ano);
                     break;
@@ -130,7 +130,7 @@ public class CarregaDadosIniciais {
 
     public void carregarLocacoes(String nomeArquivo) throws IOException, ParseException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
-        reader.readLine(); // Pular a primeira linha
+        reader.readLine(); // pula primeira linha
         String linha;
         while ((linha = reader.readLine()) != null) {
             String[] partes = linha.split(";");
