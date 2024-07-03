@@ -13,6 +13,7 @@ public class MenuPrincipal {
     private JButton btnAlteraSituacao;
     private JButton btnConsultarLocacoes;
     private JButton bntMostrarRelatorioGeral;
+    private JButton btnCarregaDadosIniciais;
     private JFrame frame;
     private ACMERobots sistema;
 
@@ -76,6 +77,16 @@ public class MenuPrincipal {
             public void actionPerformed(ActionEvent e) {
                 MostrarRelatorioGeral mostarRelatorioGeralPanel = new MostrarRelatorioGeral(frame, sistema);
                 frame.setContentPane(mostarRelatorioGeralPanel.getPanelMain());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        btnCarregaDadosIniciais.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarregaDadosIniciais carregaDadosIniciaisPanel = new CarregaDadosIniciais(frame, sistema);
+                frame.setContentPane(carregaDadosIniciaisPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
             }

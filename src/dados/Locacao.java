@@ -1,5 +1,6 @@
 package dados;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -64,4 +65,20 @@ public class Locacao {
 		double desconto = cliente.calculaDesconto(getRobos().size());
 		return valorLocacao - (valorLocacao * desconto);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Número: ").append(numero).append("\n")
+				.append("Situação: ").append(situacao).append("\n")
+				.append("Data Início: ").append(new SimpleDateFormat("dd/MM/yyyy").format(dataInicio)).append("\n")
+				.append("Data Fim: ").append(new SimpleDateFormat("dd/MM/yyyy").format(dataFim)).append("\n")
+				.append("Cliente: ").append(cliente).append("\n")
+				.append("Robôs: ").append("\n");
+		for (Robo robo : robos) {
+			sb.append("\t").append(robo).append("\n");
+		}
+		return sb.toString();
+	}
+
 }
