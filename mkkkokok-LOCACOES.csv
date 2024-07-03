@@ -1,0 +1,24 @@
+Número: 1
+Situação: EXECUTANDO
+Data Início: 03/07/2024
+Data Fim: 04/07/2024
+Cliente: Código: 1, Nome: Cliente Individual, CPF: 123.456.789-00
+Robôs: 
+	ID: 1, Modelo: tggghhh, Valor Diário: 10.0, Tipo: DOMÉSTICO, Nível: 1
+, Valor Final: 10.0
+Número: 2
+Situação: EXECUTANDO
+Data Início: 03/07/2024
+Data Fim: 04/07/2024
+Cliente: Código: 1, Nome: Cliente Individual, CPF: 123.456.789-00
+Robôs: 
+	ID: 2, Modelo: frethethh, Valor Diário: 90.0, Tipo: INDUSTRIAL, Setor: Setor A
+, Valor Final: 90.0
+Número: 3
+Situação: EXECUTANDO
+Data Início: 03/07/2024
+Data Fim: 05/07/2024
+Cliente: Código: 1, Nome: Cliente Individual, CPF: 123.456.789-00
+Robôs: 
+	ID: 3, Modelo: etgethththt, Valor Diário: 20.0, Tipo: AGRÍCOLA, Área: 100.0, Uso: Plantação
+, Valor Final: 40.0

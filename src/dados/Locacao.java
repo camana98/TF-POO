@@ -57,13 +57,19 @@ public class Locacao {
 	}
 
 
-	public double calculaValorFinal() {
+	public String calculaValorFinal() {
 		double valorLocacao = 0;
 		for (Robo robo : robos) {
 			valorLocacao += robo.calculaLocacao(getDuracaoDias());
 		}
 		double desconto = cliente.calculaDesconto(getRobos().size());
-		return valorLocacao - (valorLocacao * desconto);
+		double valorFinal = valorLocacao - (valorLocacao * desconto);
+
+
+		valorFinal = Math.round(valorFinal * 100.0) / 100.0;
+
+		
+		return String.format("%.2f", valorFinal);
 	}
 
 	@Override
