@@ -3,8 +3,8 @@ package dados;
 public class Domestico extends Robo {
 	private int nivel;
 
-	public Domestico(int id, String modelo, double valorDiario, int nivel) {
-		super(id, modelo, valorDiario);
+	public Domestico(int id, String modelo, double valorDiario, int nivel, String tipo) {
+		super(id, modelo, valorDiario, tipo);
 		this.nivel = nivel;
 	}
 

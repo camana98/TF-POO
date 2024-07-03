@@ -95,6 +95,7 @@ public class CadastraRobo {
             int id = Integer.parseInt(this.idTextField.getText().trim());
             String modelo = this.modeloTextField.getText().trim();
             Robo robo = null;
+            String tipo = null;
 
             // Verificar se já existe um robô com o mesmo ID
             for (Robo r : this.sistema.getRobos()) {
@@ -114,16 +115,19 @@ public class CadastraRobo {
                 } else if (nivel == 3) {
                     valorDiario = 50.0;
                 }
-                robo = new Domestico(id, modelo, valorDiario, nivel);
+                tipo = "DOMÉSTICO";
+                robo = new Domestico(id, modelo, valorDiario, nivel, tipo);
             } else if (this.industrialRadioButton.isSelected()) {
                 String setor = this.setorTextField.getText().trim();
                 double valorDiario = 90.0;
-                robo = new Industrial(id, modelo, valorDiario, setor);
+                tipo = "INDUSTRIAL";
+                robo = new Industrial(id, modelo, valorDiario, setor, tipo);
             } else if (this.agricolaRadioButton.isSelected()) {
                 double area = Double.parseDouble(this.areaTextField.getText().trim());
                 String uso = this.usoTextField.getText().trim();
                 double valorDiario = area * 10.0;
-                robo = new Agricola(id, modelo, valorDiario, area, uso);
+                tipo = "AGRÍCOLA";
+                robo = new Agricola(id, modelo, valorDiario, area, uso, tipo);
             } else {
                 this.taMensagens.setText("Erro: Selecione um tipo de robô.");
                 return;

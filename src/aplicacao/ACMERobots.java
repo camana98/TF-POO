@@ -20,9 +20,9 @@ public class ACMERobots {
         this.scheduler = Executors.newScheduledThreadPool(1);
 
         // Adicionar alguns robôs e clientes para teste
-        robos.add(new Domestico(1, "Robô Doméstico", 10.0, 1));
-        robos.add(new Industrial(2, "Robô Industrial", 90.0, "Setor A"));
-        robos.add(new Agricola(3, "Robô Agrícola", 20.0, 100.0, "Plantação"));
+        robos.add(new Domestico(1, "tggghhh", 10.0, 1, "DOMÉSTICO"));
+        robos.add(new Industrial(2, "frethethh", 90.0, "Setor A", "INDUSTRIAL"));
+        robos.add(new Agricola(3, "etgethththt", 20.0, 100.0, "Plantação", "AGRÍCOLA"));
 
         clientes.add(new Individual(1, "Cliente Individual", "123.456.789-00"));
         clientes.add(new Empresarial(2, "Cliente Empresarial", 2005));
