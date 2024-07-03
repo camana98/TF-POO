@@ -72,7 +72,7 @@ public class SalvarDados {
     private void salvarLocacoes(String nomeDoArquivo) throws IOException {
         FileWriter writer = new FileWriter(nomeDoArquivo);
         for (Locacao locacao : sistema.getLocacoes()) {
-            writer.write(locacao.toString() + "\n");
+            writer.write(locacao.toString() + ", Valor Final: " + locacao.calculaValorFinal() + "\n");
         }
         writer.close();
     }
