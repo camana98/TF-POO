@@ -111,7 +111,7 @@ public class ACMERobots {
         JFrame frame = new JFrame("ACMERobots - Menu Principal");
         frame.setContentPane(new MenuPrincipal(frame, sistema).getPanelMain());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
+        frame.setSize(1080, 720);
         frame.setVisible(true);
     }
 }
