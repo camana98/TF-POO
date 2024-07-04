@@ -125,7 +125,7 @@ public class CadastraRobo {
             } else if (this.agricolaRadioButton.isSelected()) {
                 double area = Double.parseDouble(this.areaTextField.getText().trim());
                 String uso = this.usoTextField.getText().trim();
-                double valorDiario = area * 10.0;
+                double valorDiario = Math.round(area * 10.0 * 100.0) / 100.0;
                 tipo = "AGRÍCOLA";
                 robo = new Agricola(id, modelo, valorDiario, area, uso, tipo);
             } else {

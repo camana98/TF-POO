@@ -17,6 +17,7 @@ public class AlteraSituacao {
     private JComboBox<Status> statusComboBox;
     private ACMERobots sistema;
     private JFrame frame;
+    private JButton processarLocacoesButton; // Novo botão
 
     public AlteraSituacao(JFrame frame, ACMERobots sistema) {
         this.frame = frame;
@@ -42,6 +43,13 @@ public class AlteraSituacao {
             }
         });
 
+        processarLocacoesButton.addActionListener(new ActionListener() { // Listener para o novo botão
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processarLocacoes();
+            }
+        });
+
         atualizarListas();
     }
 
@@ -51,12 +59,12 @@ public class AlteraSituacao {
             Locacao locacao = sistema.buscarLocacaoPorNumero(numero);
 
             if (locacao == null) {
-                mensagensTextArea.setText("Erro: Não há locação com o número indicado.");
+                mensagensTextArea.setText("Erro: Não há locação com o número indicado.\n");
                 return;
             }
 
             if (locacao.getSituacao() == Status.FINALIZADA || locacao.getSituacao() == Status.CANCELADA) {
-                mensagensTextArea.setText("Erro: Não é possível alterar uma locação FINALIZADA ou CANCELADA.");
+                mensagensTextArea.setText("Erro: Não é possível alterar uma locação FINALIZADA ou CANCELADA.\n");
                 return;
             }
 
@@ -70,16 +78,48 @@ public class AlteraSituacao {
                 if (novoStatus == Status.FINALIZADA || novoStatus == Status.CANCELADA) {
                     sistema.getLocacoesPendentes().remove(locacao);
                 }
-                mensagensTextArea.setText("Locação " + locacao.getNumero() + " foi " + novoStatus + ".");
+                mensagensTextArea.setText("Locação " + locacao.getNumero() + " foi " + novoStatus + ".\n");
             } else {
-                mensagensTextArea.setText("Erro: Situação inválida.");
+                mensagensTextArea.setText("Erro: Situação inválida.\n");
             }
 
             atualizarListas();
 
         } catch (NumberFormatException ex) {
-            mensagensTextArea.setText("Erro: Número inválido.");
+            mensagensTextArea.setText("Erro: Número inválido.\n");
         }
+    }
+
+    private void processarLocacoes() {
+        if (sistema.getLocacoesPendentes().isEmpty()) {
+            mensagensTextArea.setText("Erro: Não há locações na fila de locações pendentes.\n");
+            return;
+        }
+
+        Locacao locacao = sistema.getLocacoesPendentes().peek(); // Obter a primeira locação da fila
+
+        if (locacao != null) {
+            boolean todosRobosDisponiveis = true;
+            for (Robo robo : locacao.getRobos()) {
+                if (robo.getSituacao() == Status.OCUPADO) {
+                    todosRobosDisponiveis = false;
+                    break;
+                }
+            }
+
+            if (todosRobosDisponiveis) {
+                for (Robo robo : locacao.getRobos()) {
+                    robo.setSituacao(Status.OCUPADO);
+                }
+                locacao.setSituacao(Status.EXECUTANDO);
+                sistema.getLocacoesPendentes().remove(locacao); // Remover a locação da fila de pendentes
+                mensagensTextArea.append("Locação " + locacao.getNumero() + " está agora EXECUTANDO.\n");
+            } else {
+                mensagensTextArea.append("Locação " + locacao.getNumero() + " não pode ser processada, um ou mais robôs estão ocupados.\n");
+            }
+        }
+
+        atualizarListas();
     }
 
 

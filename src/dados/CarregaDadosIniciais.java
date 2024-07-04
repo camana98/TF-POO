@@ -89,7 +89,7 @@ public class CarregaDadosIniciais {
                 case "3":
                     double area = Double.parseDouble(partes[3]);
                     String uso = partes[4];
-                    valorDiario = area * 10.0;
+                    valorDiario = Math.round(area * 10.0 * 100.0) / 100.0;
                     tipo = "AGRÍCOLA";
                     robo = new Agricola(id, modelo, valorDiario, area, uso, tipo);
                     break;
