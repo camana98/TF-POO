@@ -6,6 +6,6 @@
 • Consultar todas as locações (X)    
 • Alterar a situação de uma locação (X)     
 • Realizar carga de dados iniciais do sistema (X)    
-• Salvar dados () - Fazer     
+• Salvar dados (X)   
 • Carregar dados (X)    
 • Finalizar sistema (X)     
