@@ -15,11 +15,11 @@ public class Empresarial extends Cliente {
 	@Override
 	public double calculaDesconto(int qtdeRobos) {
 		if (qtdeRobos >= 2 && qtdeRobos <= 9) {
-			return 0.03; // Desconto de 3%
+			return 0.03;
 		} else if (qtdeRobos > 10) {
-			return 0.07; // Desconto de 7%
+			return 0.07;
 		}
-		return 0.0; // Sem desconto
+		return 0.0;
 	}
 
 	@Override

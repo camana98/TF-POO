@@ -17,7 +17,7 @@ public class AlteraSituacao {
     private JComboBox<Status> statusComboBox;
     private ACMERobots sistema;
     private JFrame frame;
-    private JButton processarLocacoesButton; // Novo botão
+    private JButton processarLocacoesButton;
 
     public AlteraSituacao(JFrame frame, ACMERobots sistema) {
         this.frame = frame;

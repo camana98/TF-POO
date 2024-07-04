@@ -80,7 +80,7 @@ public class CadastraCliente {
             String nome = this.nomeTextField.getText().trim();
             Cliente cliente = null;
 
-            // Verificar se já existe um cliente com o mesmo código
+
             for (Cliente c : this.sistema.getClientes()) {
                 if (c.getCodigo() == codigo) {
                     this.taMensagens.setText("Erro: Já existe um cliente com o código " + codigo);

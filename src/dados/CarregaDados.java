@@ -123,7 +123,7 @@ public class CarregaDados {
 
         CarregaDadosIniciais dadosIniciais = new CarregaDadosIniciais(frame, sistema);
 
-        //carrega robôs e clientes
+
         for (String caminhoArquivo : arquivosSelecionados) {
             try {
                 if (caminhoArquivo.contains("-ROBOS")) {
@@ -138,7 +138,7 @@ public class CarregaDados {
             }
         }
 
-        //carrega locações
+
         for (String caminhoArquivo : arquivosSelecionados) {
             try {
                 if (caminhoArquivo.contains("-LOCACOES")) {

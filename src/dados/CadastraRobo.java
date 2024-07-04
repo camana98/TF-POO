@@ -97,7 +97,7 @@ public class CadastraRobo {
             Robo robo = null;
             String tipo = null;
 
-            // Verificar se já existe um robô com o mesmo ID
+
             for (Robo r : this.sistema.getRobos()) {
                 if (r.getId() == id) {
                     this.taMensagens.setText("Erro: Já existe um robô com o ID " + id);

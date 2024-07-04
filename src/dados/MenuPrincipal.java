@@ -38,7 +38,7 @@ public class MenuPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastraLocacao cadastraLocacaoPanel = new CadastraLocacao(frame, sistema);
-                cadastraLocacaoPanel.atualizarModelos(); //atualiza a lista de robos e clientes
+                cadastraLocacaoPanel.atualizarModelos();
                 frame.setContentPane(cadastraLocacaoPanel.getPanelMain());
                 frame.revalidate();
                 frame.repaint();
